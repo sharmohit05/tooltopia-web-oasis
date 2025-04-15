@@ -1,9 +1,14 @@
 
 import { Link } from "react-router-dom";
 import { categories } from "@/data/toolsData";
+import { Category } from "@/data/toolsData";
 import * as LucideIcons from "lucide-react";
 
-export default function CategorySection() {
+interface CategorySectionProps {
+  categories: Category[];
+}
+
+export default function CategorySection({ categories }: CategorySectionProps) {
   return (
     <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
