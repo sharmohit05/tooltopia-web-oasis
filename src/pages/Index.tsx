@@ -1,13 +1,47 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import Layout from "@/components/layout/Layout";
+import Hero from "@/components/home/Hero";
+import CategorySection from "@/components/home/CategorySection";
+import ToolsSection from "@/components/home/ToolsSection";
+import Benefits from "@/components/home/Benefits";
+import { categories, getFeaturedTools, getPopularTools } from "@/data/toolsData";
+
+const getCategoryColors = () => {
+  const colorMap: Record<string, string> = {};
+  categories.forEach((category) => {
+    colorMap[category.id] = category.color;
+  });
+  return colorMap;
+};
 
 const Index = () => {
+  const featuredTools = getFeaturedTools();
+  const popularTools = getPopularTools(8);
+  const colorMap = getCategoryColors();
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <Layout>
+      <Hero />
+      
+      <CategorySection categories={categories} />
+      
+      <ToolsSection
+        title="Featured Tools"
+        description="Our most popular and useful tools to help you with your tasks"
+        tools={featuredTools}
+        colorMap={colorMap}
+      />
+      
+      <Benefits />
+      
+      <ToolsSection
+        title="Popular Tools"
+        description="What others are using right now to get their work done"
+        tools={popularTools}
+        colorMap={colorMap}
+        className="bg-gray-50"
+      />
+    </Layout>
   );
 };
 
