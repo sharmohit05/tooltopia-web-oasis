@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Slider } from "@/components/ui/slider";
 import { toast } from "sonner";
-import { Copy, EyeDropper } from "lucide-react";
+import { Copy, Pipette } from "lucide-react";
 
 export default function ColorPicker() {
   const [hexColor, setHexColor] = useState("#6366F1");
@@ -324,7 +324,7 @@ export default function ColorPicker() {
             className="w-full" 
             onClick={pickColorFromScreen}
           >
-            <EyeDropper className="h-4 w-4 mr-2" />
+            <Pipette className="h-4 w-4 mr-2" />
             Pick Color from Screen
           </Button>
         </CardFooter>
