@@ -24,7 +24,9 @@ const CategoryPage = () => {
     return null;
   }
   
-  const IconComponent = LucideIcons[category.icon as keyof typeof LucideIcons] || LucideIcons.Folder;
+  const IconComponent = category.icon && LucideIcons[category.icon as keyof typeof LucideIcons] 
+    ? LucideIcons[category.icon as keyof typeof LucideIcons] 
+    : LucideIcons.Folder;
   
   return (
     <Layout>

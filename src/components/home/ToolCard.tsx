@@ -11,25 +11,26 @@ interface ToolCardProps {
 export default function ToolCard({ tool, color }: ToolCardProps) {
   // Dynamically get icon from Lucide
   const getIcon = () => {
-    if (tool.icon) {
+    if (tool.icon && tool.icon in LucideIcons) {
       const IconComponent = LucideIcons[tool.icon as keyof typeof LucideIcons];
-      if (IconComponent) {
-        return <IconComponent className={`h-6 w-6 text-${color}`} />;
-      }
+      return <IconComponent className={`h-6 w-6 text-${color}`} />;
     }
     
     // Default icons based on category
-    const categoryIcons: Record<string, React.ReactNode> = {
-      text: <LucideIcons.FileText className={`h-6 w-6 text-${color}`} />,
-      web: <LucideIcons.Globe className={`h-6 w-6 text-${color}`} />,
-      image: <LucideIcons.Image className={`h-6 w-6 text-${color}`} />,
-      math: <LucideIcons.Calculator className={`h-6 w-6 text-${color}`} />,
-      conversion: <LucideIcons.RefreshCw className={`h-6 w-6 text-${color}`} />,
-      security: <LucideIcons.Lock className={`h-6 w-6 text-${color}`} />,
-      developer: <LucideIcons.Code className={`h-6 w-6 text-${color}`} />,
+    const categoryMap: Record<string, keyof typeof LucideIcons> = {
+      text: "FileText",
+      web: "Globe",
+      image: "Image",
+      math: "Calculator",
+      conversion: "RefreshCw",
+      security: "Lock",
+      developer: "Code",
     };
     
-    return categoryIcons[tool.category] || <LucideIcons.Tool className={`h-6 w-6 text-${color}`} />;
+    const iconName = categoryMap[tool.category] || "Tool";
+    const CategoryIcon = LucideIcons[iconName];
+    
+    return <CategoryIcon className={`h-6 w-6 text-${color}`} />;
   };
 
   return (

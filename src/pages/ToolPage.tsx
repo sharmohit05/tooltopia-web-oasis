@@ -37,7 +37,9 @@ const ToolPage = () => {
   }
   
   const ToolComponent = toolComponents[tool.id];
-  const CategoryIconComponent = LucideIcons[category.icon as keyof typeof LucideIcons] || LucideIcons.Folder;
+  const CategoryIcon = category.icon && LucideIcons[category.icon as keyof typeof LucideIcons] 
+    ? LucideIcons[category.icon as keyof typeof LucideIcons] 
+    : LucideIcons.Folder;
   
   return (
     <Layout>
@@ -56,7 +58,7 @@ const ToolPage = () => {
             
             <div className="flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-6">
               <div className={`p-4 rounded-full bg-${category.color}/10`}>
-                <CategoryIconComponent className={`h-8 w-8 text-${category.color}`} />
+                <CategoryIcon className={`h-8 w-8 text-${category.color}`} />
               </div>
               <div>
                 <h1 className="text-3xl font-bold mb-2">{tool.name}</h1>
