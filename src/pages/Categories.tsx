@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { categories } from "@/data/toolsData";
 import * as LucideIcons from "lucide-react";
+import { LucideIcon } from "lucide-react";
 
 const Categories = () => {
   return (
@@ -19,9 +20,11 @@ const Categories = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {categories.map((category) => {
               // Safely get the icon component
-              const IconComponent = category.icon && LucideIcons[category.icon as keyof typeof LucideIcons] 
-                ? LucideIcons[category.icon as keyof typeof LucideIcons] 
-                : LucideIcons.Folder;
+              let IconComponent: LucideIcon = LucideIcons.Folder;
+              
+              if (category.icon && category.icon in LucideIcons) {
+                IconComponent = LucideIcons[category.icon as keyof typeof LucideIcons] as LucideIcon;
+              }
                 
               return (
                 <Link 

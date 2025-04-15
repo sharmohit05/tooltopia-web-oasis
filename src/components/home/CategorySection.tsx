@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { categories } from "@/data/toolsData";
 import { Category } from "@/data/toolsData";
 import * as LucideIcons from "lucide-react";
+import { LucideIcon } from "lucide-react";
 
 interface CategorySectionProps {
   categories: Category[];
@@ -22,9 +23,11 @@ export default function CategorySection({ categories }: CategorySectionProps) {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
           {categories.map((category) => {
             // Safely get icon component
-            const IconComponent = category.icon && LucideIcons[category.icon as keyof typeof LucideIcons] 
-              ? LucideIcons[category.icon as keyof typeof LucideIcons] 
-              : LucideIcons.Folder;
+            let IconComponent: LucideIcon = LucideIcons.Folder;
+            
+            if (category.icon && category.icon in LucideIcons) {
+              IconComponent = LucideIcons[category.icon as keyof typeof LucideIcons] as LucideIcon;
+            }
               
             return (
               <Link 

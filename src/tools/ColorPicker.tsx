@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -14,10 +13,8 @@ export default function ColorPicker() {
   const [hslColor, setHslColor] = useState({ h: 239, s: 84, l: 67 });
   const [activeTab, setActiveTab] = useState("hex");
 
-  // Update colors when hex changes
   useEffect(() => {
     if (activeTab === "hex") {
-      // Convert HEX to RGB
       const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hexColor);
       if (result) {
         const r = parseInt(result[1], 16);
@@ -25,7 +22,6 @@ export default function ColorPicker() {
         const b = parseInt(result[3], 16);
         setRgbColor({ r, g, b });
         
-        // Convert RGB to HSL
         const rNorm = r / 255;
         const gNorm = g / 255;
         const bNorm = b / 255;
@@ -63,22 +59,16 @@ export default function ColorPicker() {
     }
   }, [hexColor, activeTab]);
 
-  // Update colors when RGB changes
   useEffect(() => {
     if (activeTab === "rgb") {
-      // Convert RGB to HEX
       const { r, g, b } = rgbColor;
       const hex = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
       setHexColor(hex);
-      
-      // RGB to HSL calculation is handled in the hex useEffect
     }
   }, [rgbColor, activeTab]);
 
-  // Update colors when HSL changes
   useEffect(() => {
     if (activeTab === "hsl") {
-      // Convert HSL to RGB
       const { h, s, l } = hslColor;
       const sNorm = s / 100;
       const lNorm = l / 100;
@@ -107,8 +97,6 @@ export default function ColorPicker() {
       const bInt = Math.round((b + m) * 255);
       
       setRgbColor({ r: rInt, g: gInt, b: bInt });
-      
-      // RGB to HEX is handled in the rgb useEffect
     }
   }, [hslColor, activeTab]);
 
@@ -134,7 +122,6 @@ export default function ColorPicker() {
       .catch(() => toast.error("Failed to copy color value"));
   };
 
-  // Add eyedropper functionality if browser supports it
   const pickColorFromScreen = async () => {
     if (!('EyeDropper' in window)) {
       toast.error("Your browser doesn't support the eyedropper tool");
@@ -142,7 +129,6 @@ export default function ColorPicker() {
     }
 
     try {
-      // @ts-ignore - TypeScript doesn't know about the EyeDropper API yet
       const eyeDropper = new window.EyeDropper();
       const result = await eyeDropper.open();
       setHexColor(result.sRGBHex);

@@ -6,6 +6,7 @@ import Layout from "@/components/layout/Layout";
 import ToolCard from "@/components/home/ToolCard";
 import { getCategoryById, getToolsByCategory } from "@/data/toolsData";
 import * as LucideIcons from "lucide-react";
+import { LucideIcon } from "lucide-react";
 
 const CategoryPage = () => {
   const { categoryId } = useParams<{ categoryId: string }>();
@@ -24,9 +25,11 @@ const CategoryPage = () => {
     return null;
   }
   
-  const IconComponent = category.icon && LucideIcons[category.icon as keyof typeof LucideIcons] 
-    ? LucideIcons[category.icon as keyof typeof LucideIcons] 
-    : LucideIcons.Folder;
+  let IconComponent: LucideIcon = LucideIcons.Folder;
+  
+  if (category.icon && category.icon in LucideIcons) {
+    IconComponent = LucideIcons[category.icon as keyof typeof LucideIcons] as LucideIcon;
+  }
   
   return (
     <Layout>

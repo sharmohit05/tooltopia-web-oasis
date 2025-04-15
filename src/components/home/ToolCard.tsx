@@ -2,6 +2,7 @@
 import { Link } from "react-router-dom";
 import { Tool } from "@/data/toolsData";
 import * as LucideIcons from "lucide-react";
+import { LucideIcon } from "lucide-react";
 
 interface ToolCardProps {
   tool: Tool;
@@ -11,8 +12,10 @@ interface ToolCardProps {
 export default function ToolCard({ tool, color }: ToolCardProps) {
   // Dynamically get icon from Lucide
   const getIcon = () => {
+    let IconComponent: LucideIcon = LucideIcons.Folder;
+    
     if (tool.icon && tool.icon in LucideIcons) {
-      const IconComponent = LucideIcons[tool.icon as keyof typeof LucideIcons];
+      IconComponent = LucideIcons[tool.icon as keyof typeof LucideIcons] as LucideIcon;
       return <IconComponent className={`h-6 w-6 text-${color}`} />;
     }
     
@@ -28,7 +31,7 @@ export default function ToolCard({ tool, color }: ToolCardProps) {
     };
     
     const iconName = categoryMap[tool.category] || "Tool";
-    const CategoryIcon = LucideIcons[iconName];
+    const CategoryIcon = LucideIcons[iconName] as LucideIcon;
     
     return <CategoryIcon className={`h-6 w-6 text-${color}`} />;
   };

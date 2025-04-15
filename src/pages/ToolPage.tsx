@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { getCategoryById, getToolById } from "@/data/toolsData";
 import * as LucideIcons from "lucide-react";
 import { ChevronLeft } from "lucide-react";
+import { LucideIcon } from "lucide-react";
 
 // Import all tools components
 import TextCaseConverter from "@/tools/TextCaseConverter";
@@ -37,9 +38,11 @@ const ToolPage = () => {
   }
   
   const ToolComponent = toolComponents[tool.id];
-  const CategoryIcon = category.icon && LucideIcons[category.icon as keyof typeof LucideIcons] 
-    ? LucideIcons[category.icon as keyof typeof LucideIcons] 
-    : LucideIcons.Folder;
+  
+  let CategoryIcon: LucideIcon = LucideIcons.Folder;
+  if (category.icon && category.icon in LucideIcons) {
+    CategoryIcon = LucideIcons[category.icon as keyof typeof LucideIcons] as LucideIcon;
+  }
   
   return (
     <Layout>
