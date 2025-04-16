@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -6,6 +7,22 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Slider } from "@/components/ui/slider";
 import { toast } from "sonner";
 import { Copy, Pipette } from "lucide-react";
+
+// Define the EyeDropper interface for TypeScript
+interface EyeDropperConstructor {
+  new(): EyeDropperInstance;
+}
+
+interface EyeDropperInstance {
+  open(): Promise<{ sRGBHex: string }>;
+}
+
+// Add EyeDropper to the global Window interface
+declare global {
+  interface Window {
+    EyeDropper?: EyeDropperConstructor;
+  }
+}
 
 export default function ColorPicker() {
   const [hexColor, setHexColor] = useState("#6366F1");
@@ -123,7 +140,7 @@ export default function ColorPicker() {
   };
 
   const pickColorFromScreen = async () => {
-    if (!('EyeDropper' in window)) {
+    if (!window.EyeDropper) {
       toast.error("Your browser doesn't support the eyedropper tool");
       return;
     }
