@@ -12,12 +12,20 @@ import { LucideIcon } from "lucide-react";
 import TextCaseConverter from "@/tools/TextCaseConverter";
 import ColorPicker from "@/tools/ColorPicker";
 import PasswordGenerator from "@/tools/PasswordGenerator";
+import WordCounter from "@/tools/WordCounter";
+import LoremIpsumGenerator from "@/tools/LoremIpsumGenerator";
+import TextDiffChecker from "@/tools/TextDiffChecker";
+import TextToSlugConverter from "@/tools/TextToSlugConverter";
 
 // Tool component mapping
 const toolComponents: Record<string, React.ComponentType> = {
   "text-case-converter": TextCaseConverter,
   "color-picker": ColorPicker,
   "password-generator": PasswordGenerator,
+  "word-counter": WordCounter,
+  "lorem-ipsum-generator": LoremIpsumGenerator,
+  "text-diff-checker": TextDiffChecker,
+  "text-to-slug": TextToSlugConverter,
 };
 
 const ToolPage = () => {
