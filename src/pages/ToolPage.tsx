@@ -16,6 +16,11 @@ import WordCounter from "@/tools/WordCounter";
 import LoremIpsumGenerator from "@/tools/LoremIpsumGenerator";
 import TextDiffChecker from "@/tools/TextDiffChecker";
 import TextToSlugConverter from "@/tools/TextToSlugConverter";
+import QRCodeGenerator from "@/tools/QRCodeGenerator";
+import HTMLEntitiesEncoder from "@/tools/HTMLEntitiesEncoder";
+import HTMLMinifier from "@/tools/HTMLMinifier";
+import CSSMinifier from "@/tools/CSSMinifier";
+import JSMinifier from "@/tools/JSMinifier";
 
 // Tool component mapping
 const toolComponents: Record<string, React.ComponentType> = {
@@ -26,6 +31,11 @@ const toolComponents: Record<string, React.ComponentType> = {
   "lorem-ipsum-generator": LoremIpsumGenerator,
   "text-diff-checker": TextDiffChecker,
   "text-to-slug": TextToSlugConverter,
+  "qr-code-generator": QRCodeGenerator,
+  "html-entities-encoder": HTMLEntitiesEncoder,
+  "html-minifier": HTMLMinifier,
+  "css-minifier": CSSMinifier,
+  "js-minifier": JSMinifier,
 };
 
 const ToolPage = () => {
